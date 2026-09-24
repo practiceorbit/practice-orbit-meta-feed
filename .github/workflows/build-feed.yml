@@ -1,0 +1,59 @@
+name: Build Meta feed
+
+on:
+  schedule:
+    - cron: "17 */4 * * *"   # every 4 hours (UTC)
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["feed/**", "assets/**", ".github/workflows/build-feed.yml"]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: build-feed
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          python -m playwright install --with-deps chromium
+
+      - name: Build feed and cards
+        run: python feed/build.py
+
+      - name: Save feed back to the repo
+        run: |
+          git config user.name "po-feed-bot"
+          git config user.email "po-feed-bot@users.noreply.github.com"
+          git add docs
+          if git diff --cached --quiet; then
+            echo "No changes"
+          else
+            git commit -m "Feed update $(date -u +%Y-%m-%dT%H:%MZ)"
+            git push
+          fi
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+      - id: deploy
+        uses: actions/deploy-pages@v4
