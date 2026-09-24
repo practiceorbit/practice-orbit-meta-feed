@@ -2,7 +2,7 @@ name: Build Meta feed
 
 on:
   schedule:
-    - cron: "17 */4 * * *"   # every 4 hours (UTC)
+    - cron: "0 13 * * *"   # daily at 13:00 UTC (7am Mountain)
   workflow_dispatch:
   push:
     branches: [main]
