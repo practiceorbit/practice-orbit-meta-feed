@@ -174,7 +174,7 @@ def main():
         broker = p.get("company_organizationName")
         if broker:
             desc += f" Listed by {broker} on Practice Orbit."
-        link = p["url"] + ("&" if "?" in p["url"] else "?") + UTM
+        link = "https://practiceorbit.com/app/practices?" + UTM + "&utm_content=" + p["slug"] + "&utm_term=" + L["state"]
         rows.append({
             "id": p["slug"],
             "title": f"{L['type']} Practice for Sale – {place}"[:150],
