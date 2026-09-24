@@ -123,7 +123,7 @@ def main():
             report["notes"].append(f"{p['slug']}: operatories {ops} hidden (over limit)"); ops = None
 
         city = tidy_city(p.get("location_city"))
-        ptype = p.get("practiceType") or "Dental Practice"
+        ptype = p.get("practiceType") or "Dental"
         reg = region(state, city)
         bg = BG / f"{reg}.jpg"
         if not bg.exists():
