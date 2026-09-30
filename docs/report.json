@@ -1,7 +1,7 @@
 {
- "built_at": "2026-09-29T18:22:09Z",
- "fetched": 156,
- "included": 44,
+ "built_at": "2026-09-30T18:11:36Z",
+ "fetched": 155,
+ "included": 43,
  "excluded": {
   "no_asking_price": [
    "P-QT8PXR",
@@ -133,7 +133,6 @@
   "OR": 2,
   "MD": 2,
   "KS": 1,
-  "OH": 1,
   "GA": 1,
   "NC": 1,
   "NY": 1
