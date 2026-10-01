@@ -1,7 +1,7 @@
 {
- "built_at": "2026-09-30T18:11:36Z",
- "fetched": 155,
- "included": 43,
+ "built_at": "2026-10-01T18:37:33Z",
+ "fetched": 164,
+ "included": 52,
  "excluded": {
   "no_asking_price": [
    "P-QT8PXR",
@@ -22,7 +22,6 @@
    "P-Z4QNT4",
    "P-NEQF43",
    "P-B8PQ6J",
-   "P-682EXG",
    "P-P9WTT6",
    "P-C2Z62G",
    "P-AY7YDQ",
@@ -91,6 +90,7 @@
    "P-TF39HD",
    "P-E9YW9X",
    "P-43EB5E",
+   "P-2HG3T2",
    "P-WQR6BT",
    "P-7R72VJ",
    "P-37TK9J",
@@ -121,12 +121,18 @@
   ]
  },
  "notes": [
+  "P-PQ4QC3: no background image for NV; used plain branded card",
+  "P-3GKRCC: no background image for NV; used plain branded card",
   "P-X3YEPK: collections 12,056,692 hidden (over limit)",
-  "P-X3YEPK: operatories 38 hidden (over limit)"
+  "P-X3YEPK: operatories 38 hidden (over limit)",
+  "P-TGSA4B: no background image for NV; used plain branded card",
+  "P-29FPVX: no background image for NV; used plain branded card",
+  "P-G4EKZ5: no background image for NV; used plain branded card"
  ],
  "by_state": {
+  "AZ": 17,
   "CA": 14,
-  "AZ": 13,
+  "NV": 5,
   "CO": 3,
   "WA": 3,
   "TX": 2,
