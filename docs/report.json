@@ -1,7 +1,7 @@
 {
- "built_at": "2026-10-04T17:11:12Z",
- "fetched": 164,
- "included": 52,
+ "built_at": "2026-10-05T20:56:59Z",
+ "fetched": 161,
+ "included": 51,
  "excluded": {
   "no_asking_price": [
    "P-QT8PXR",
@@ -29,7 +29,6 @@
    "P-P42WPZ",
    "P-2WEYDQ",
    "P-KRD6VE",
-   "P-XCZFCV",
    "P-9CMRZA",
    "P-72DBFH",
    "P-FVY862",
@@ -85,7 +84,6 @@
    "P-QB2HBF",
    "P-WHMVGC",
    "P-RWJW27",
-   "P-CV4PA2",
    "P-VGT46K",
    "P-TF39HD",
    "P-E9YW9X",
@@ -130,7 +128,7 @@
   "P-G4EKZ5: no background image for NV; used plain branded card"
  ],
  "by_state": {
-  "AZ": 17,
+  "AZ": 16,
   "CA": 14,
   "NV": 5,
   "CO": 3,
@@ -144,7 +142,7 @@
   "NY": 1
  },
  "excluded_counts": {
-  "no_asking_price": 104,
+  "no_asking_price": 102,
   "sold": 8
  }
 }
