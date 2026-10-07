@@ -1,6 +1,6 @@
 {
- "built_at": "2026-10-06T18:41:10Z",
- "fetched": 178,
+ "built_at": "2026-10-07T19:07:38Z",
+ "fetched": 180,
  "included": 58,
  "excluded": {
   "no_asking_price": [
@@ -58,6 +58,7 @@
    "P-TDEY6P",
    "P-MWKP35",
    "P-7HXQMN",
+   "P-N5KA97",
    "P-4CKH3P",
    "P-48SDYB",
    "P-7A53RQ",
@@ -76,6 +77,7 @@
    "P-53XERA",
    "P-QB2HBF",
    "P-WHMVGC",
+   "P-M9WGK9",
    "P-RWJW27",
    "P-CV4PA2",
    "P-VGT46K",
@@ -157,7 +159,7 @@
   "NY": 1
  },
  "excluded_counts": {
-  "no_asking_price": 98,
+  "no_asking_price": 100,
   "sold": 22
  }
 }
