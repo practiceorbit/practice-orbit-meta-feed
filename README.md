@@ -28,7 +28,7 @@ card images are public either way (Meta has to be able to fetch them).
 |---|---|
 | `id` | Practice Orbit listing code, e.g. `P-JPJ7TR` |
 | `price` | Asking price |
-| `link` | Listing page with UTM tags (`utm_source=facebook&utm_medium=paid_social&utm_campaign=state_listing_catalog`) |
+| `link` | State search page for the listing's state, e.g. `https://practiceorbit.com/practices?state=CA`, plus UTM tags (`utm_source=facebook&utm_medium=paid_social&utm_campaign=state_listing_catalog&utm_content=<id>&utm_term=<state>`) |
 | `image_link` | Generated card image |
 | `custom_label_0` | State abbreviation (`AZ`, `CA`, …) — **use this for product sets** |
 | `custom_label_1` | Region (`CA-BAY`, `CA-LA`, `CA-OC`, `CA-SD`, `CA-IE`, `CA-NORTH`, or the state) |
@@ -52,8 +52,13 @@ gets a plain branded card and a note in `report.json`.
 
 1. **Commerce Manager → Catalogues → Add catalogue** (E-commerce), owned by the Practice Orbit business.
 2. **Data sources → Data feed → Scheduled feed**, paste the `feed.csv` URL, repeat **hourly** or **daily**, currency USD.
-3. **Product sets:** `Arizona` (custom_label_0 = AZ), `California` (custom_label_0 = CA),
-   `Other states` (custom_label_0 is not AZ or CA). Add more single-state sets as inventory grows.
-4. **Ads Manager:** one campaign using Advantage+ catalog ads with the Practice Orbit catalogue and the
-   **Practice Orbit - 2** pixel. One ad set per product set, targeted to the matching location
-   (Arizona; California; the other states with listings). Carousel catalog ad, CTA "Learn More".
+3. **Product sets:** one per state with its own ad set — currently Arizona, California, Colorado, Maryland,
+   Oregon, Texas and Washington (custom_label_0 = that state) — plus `Other states` (custom_label_0 is none of
+   those). Add more single-state sets as inventory grows.
+4. **Ads Manager:** campaign **PO | State Listings – Leads**, Advantage+ catalog ads with the Practice Orbit
+   catalogue and the **Practice Orbit - 2** pixel. One ad set per product set, targeted to the matching
+   location. Carousel catalog ad, CTA "Learn More".
+5. **Destination:** each ad has *Override catalogue website links* on, with the deep link and Website URL set to
+   that state's search page (`https://practiceorbit.com/practices?state=XX`; the Other States ad uses
+   `https://practiceorbit.com/practices`). The feed's `link` column points to the same state page, so the
+   ads and the feed agree. When you add a state ad, set its override link the same way.

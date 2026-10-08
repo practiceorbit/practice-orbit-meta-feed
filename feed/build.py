@@ -26,6 +26,7 @@ def base_url():
     owner, name = repo.split("/")
     return f"https://{owner.lower()}.github.io/{name}"
 
+SEARCH_URL = "https://practiceorbit.com/practices"   # state search page; ?state=XX filters it
 UTM = "utm_source=facebook&utm_medium=paid_social&utm_campaign=state_listing_catalog"
 
 # Sanity limits: numbers outside these are treated as data-entry errors.
@@ -174,7 +175,9 @@ def main():
         broker = p.get("company_organizationName")
         if broker:
             desc += f" Listed by {broker} on Practice Orbit."
-        link = "https://practiceorbit.com/app/practices?" + UTM + "&utm_content=" + p["slug"] + "&utm_term=" + L["state"]
+        # Same state search page the ads send people to, e.g. /practices?state=CA
+        link = (f"{SEARCH_URL}?state={L['state']}&" + UTM
+                + "&utm_content=" + p["slug"] + "&utm_term=" + L["state"])
         rows.append({
             "id": p["slug"],
             "title": f"{L['type']} Practice for Sale – {place}"[:150],
