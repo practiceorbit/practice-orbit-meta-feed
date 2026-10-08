@@ -1,7 +1,7 @@
 {
- "built_at": "2026-10-07T19:07:38Z",
- "fetched": 180,
- "included": 58,
+ "built_at": "2026-10-08T17:33:58Z",
+ "fetched": 179,
+ "included": 57,
  "excluded": {
   "no_asking_price": [
    "P-QT8PXR",
@@ -146,7 +146,7 @@
  ],
  "by_state": {
   "AZ": 17,
-  "CA": 15,
+  "CA": 14,
   "NV": 10,
   "CO": 3,
   "OR": 3,
