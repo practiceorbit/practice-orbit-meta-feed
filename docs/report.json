@@ -1,7 +1,7 @@
 {
- "built_at": "2026-10-08T19:03:53Z",
+ "built_at": "2026-10-09T18:34:19Z",
  "fetched": 179,
- "included": 57,
+ "included": 56,
  "excluded": {
   "no_asking_price": [
    "P-QT8PXR",
@@ -122,6 +122,7 @@
    "P-P53Y63",
    "P-MSVWC6",
    "P-YWCT77",
+   "P-C88J7N",
    "P-488VJ5",
    "P-GHZP9Q",
    "P-TGSWJV",
@@ -145,7 +146,7 @@
   "P-G4EKZ5: no background image for NV; used plain branded card"
  ],
  "by_state": {
-  "AZ": 17,
+  "AZ": 16,
   "CA": 14,
   "NV": 10,
   "CO": 3,
@@ -160,6 +161,6 @@
  },
  "excluded_counts": {
   "no_asking_price": 100,
-  "sold": 22
+  "sold": 23
  }
 }
