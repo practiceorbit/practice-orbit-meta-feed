@@ -7,7 +7,7 @@ each, and writes docs/feed.csv for Meta Commerce Manager (served by GitHub Pages
 Run:  python feed/build.py            (network + render)
       BASE_URL=https://example.github.io/repo python feed/build.py
 """
-import csv, hashlib, html, json, os, pathlib, sys, datetime, urllib.request
+import csv, hashlib, html, json, os, pathlib, re, sys, datetime, urllib.request
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "feed"))
@@ -16,7 +16,7 @@ from card import card_html  # noqa: E402
 DOCS = ROOT / "docs"
 CARDS = DOCS / "cards"
 BG = ROOT / "assets" / "backgrounds"
-ENDPOINT = "https://us-central1-practice-orbit.cloudfunctions.net/searchPractices"
+SITE = "https://practiceorbit.com"   # public search page; listings are embedded as JSON
 
 # Where GitHub Pages serves docs/. In Actions this is derived from the repo name.
 def base_url():
@@ -61,21 +61,80 @@ CA_REGIONS = {
            "Murrieta","Hemet","Fontana","Redlands","Indio"],
 }
 
+# The public site now gives a county for most listings instead of a city.
+CA_COUNTY_REGIONS = {
+ "CA-BAY": ["Alameda County","Contra Costa County","Santa Clara County","San Mateo County","San Francisco County",
+            "Marin County","Monterey County","Santa Cruz County","San Benito County"],
+ "CA-NORTH": ["Sonoma County","Napa County","Solano County","Placer County","Sacramento County","Stanislaus County",
+              "San Joaquin County","Fresno County","Kern County","Tulare County","Merced County","Butte County",
+              "Shasta County","Yolo County","El Dorado County"],
+ "CA-OC": ["Orange County"],
+ "CA-SD": ["San Diego County"],
+ "CA-IE": ["Riverside County","San Bernardino County"],
+ "CA-LA": ["Los Angeles County","Ventura County","Santa Barbara County"],
+}
+
 def region(state, city):
     if state != "CA":
         return state
     c = (city or "").strip().lower()
+    for r, counties in CA_COUNTY_REGIONS.items():
+        if c in (x.lower() for x in counties):
+            return r
     for r, cities in CA_REGIONS.items():
         if c in (x.lower() for x in cities):
             return r
     return "CA-LA"   # LA, Ventura and anything unmapped
 
 
-def fetch():
-    req = urllib.request.Request(ENDPOINT, data=json.dumps({"data": {"radius": 3500}}).encode(),
-                                 headers={"Content-Type": "application/json", "User-Agent": "po-meta-feed"})
+def _get(url):
+    req = urllib.request.Request(url, headers={"User-Agent": "po-meta-feed (+https://github.com/practiceorbit/practice-orbit-meta-feed)"})
     with urllib.request.urlopen(req, timeout=120) as r:
-        practices = json.load(r)["result"]["practices"]
+        return r.read().decode("utf-8")
+
+
+def _broker(pin):
+    """Brokerage name from the listing page's 'listed by …' line ('' if not found)."""
+    try:
+        page = _get(SITE + pin["url"])
+    except Exception:
+        return ""
+    m = re.search(r'class="lp-sub"[^>]*>(.*?)</p>', page, re.S)
+    if not m:
+        return ""
+    m = re.search(r"listed by\s+(.+)", html.unescape(re.sub(r"<[^>]+>", "", m.group(1))))
+    return m.group(1).strip() if m else ""
+
+
+def fetch():
+    """All listings from the public search page's embedded JSON (<script id="ps-pins">).
+
+    The old searchPractices Cloud Function started returning HTTP 500 on 2026-10-10, after
+    the site redesign. The public page renders every listing server-side, so read that instead
+    and reshape each pin into the field names the rest of this script expects.
+    """
+    page = _get(SITE + "/practices")
+    m = re.search(r'<script[^>]*id="ps-pins"[^>]*>(.*?)</script>', page, re.S)
+    if not m:
+        raise SystemExit("Practice Orbit's /practices page has no ps-pins data block; the page layout changed.")
+    pins = json.loads(m.group(1))["pins"]
+    practices = []
+    for pin in pins:
+        status = pin.get("status")
+        live_priced = status == "active" and pin.get("price")
+        practices.append({
+            "slug": pin["id"],
+            "status_sold": status == "sold",
+            # under contract, coming soon or anything else that isn't open for offers
+            "status_salePending": status != "active" and status != "sold",
+            "financial_askingPrice": pin.get("price"),
+            "financial_totalCollections": pin.get("coll"),
+            "financial_totalOperatories": pin.get("ops"),
+            "location_state": pin.get("state"),
+            "location_city": pin.get("town"),        # a county for most listings (confidential)
+            "practiceType": pin.get("type"),
+            "company_organizationName": _broker(pin) if live_priced else "",
+        })
     if len(practices) < 20:
         raise SystemExit(f"Practice Orbit returned only {len(practices)} listings; refusing to publish a suspect feed.")
     return practices

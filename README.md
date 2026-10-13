@@ -1,9 +1,9 @@
 # Practice Orbit · Meta catalog feed
 
 Builds the product feed behind Practice Orbit's state-targeted Facebook/Instagram
-listing ads. Every 4 hours a GitHub Action:
+listing ads. Once a day (13:00 UTC, though GitHub often starts it a few hours late) a GitHub Action:
 
-1. pulls all listings from Practice Orbit,
+1. pulls all listings from the public search page, practiceorbit.com/practices (embedded as JSON in `<script id="ps-pins">`; brokerage names come from each listing page's "listed by" line),
 2. keeps only listings that are **live** (not sold, not under contract) **and have an asking price**,
 3. renders a branded 1080×1080 card for each (state/region background image, key numbers),
 4. writes `docs/feed.csv` and publishes `docs/` with GitHub Pages.
@@ -36,6 +36,9 @@ card images are public either way (Meta has to be able to fetch them).
 | `custom_label_3` | Listing broker |
 
 ## Rules in `feed/build.py`
+
+- Until 2026-10-10 the feed read the `searchPractices` Cloud Function. That function started returning HTTP 500 after the site redesign, so the feed now reads the public page instead.
+- Listings show a county (e.g. "Clark County, NV") rather than a city, matching the public site. California counties map to the regional background images.
 
 - Excluded: sold, under contract, no asking price, asking price outside $25K–$15M, unknown state.
 - Numbers treated as data-entry errors are hidden on the card (collections over $10M, more than 30 operatories).
