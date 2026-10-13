@@ -74,7 +74,16 @@ CA_COUNTY_REGIONS = {
  "CA-LA": ["Los Angeles County","Ventura County","Santa Barbara County"],
 }
 
+# Northern Nevada (Reno / Carson / Tahoe side) gets its own background; the rest uses NV (Las Vegas).
+NV_NORTH_COUNTIES = ["Washoe County","Carson City","Douglas County","Lyon County","Storey County",
+                     "Churchill County","Pershing County","Humboldt County","Elko County","Mineral County"]
+
 def region(state, city):
+    if state == "NV":
+        c = (city or "").strip().lower()
+        if c in (x.lower() for x in NV_NORTH_COUNTIES) or c in ("reno", "sparks", "carson city", "minden", "gardnerville"):
+            return "NV-NORTH"
+        return "NV"
     if state != "CA":
         return state
     c = (city or "").strip().lower()

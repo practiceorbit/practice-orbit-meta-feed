@@ -194,5 +194,19 @@
   "license": "pdm",
   "source": "https://commons.wikimedia.org/wiki/File:San_Gabriel_Mtns_%26_Los_Angeles_Skyline_(3699427354).jpg",
   "creator": ""
+ },
+ "NV": {
+  "file": "NV.jpg",
+  "subject": "File:Las Vegas, United States (Unsplash KU9acYILWmg).jpg",
+  "license": "cc0",
+  "source": "https://commons.wikimedia.org/w/index.php?curid=61870306",
+  "creator": "Rob Bye robertbye"
+ },
+ "NV-NORTH": {
+  "file": "NV-NORTH.jpg",
+  "subject": "File:Reno2002.jpg",
+  "license": "pdm",
+  "source": "https://commons.wikimedia.org/w/index.php?curid=2423526",
+  "creator": "Jrbbopp"
  }
 }
