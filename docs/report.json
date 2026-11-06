@@ -1,7 +1,7 @@
 {
- "built_at": "2026-11-05T20:23:38Z",
- "fetched": 289,
- "included": 107,
+ "built_at": "2026-11-06T19:45:59Z",
+ "fetched": 296,
+ "included": 108,
  "excluded": {
   "no_asking_price": [
    "P-CM9ZNB",
@@ -9,6 +9,9 @@
    "P-VJ6HJ5",
    "P-AA7BH8",
    "P-HMPKD8",
+   "P-M645BF",
+   "P-NC2RT6",
+   "P-R2Y2H6",
    "P-TXPJAZ",
    "P-AHBMA3",
    "P-B6ZF58",
@@ -51,10 +54,12 @@
    "P-YQMYA8",
    "P-AP9GXC",
    "P-NDGAHD",
+   "P-5VJTD9",
    "P-AY7YDQ",
    "P-WMXCE7",
    "P-KPJKPW",
    "P-2HG3T2",
+   "P-K8DJ5K",
    "P-P42WPZ",
    "P-Q2GKFS",
    "P-HN2KR8",
@@ -133,6 +138,7 @@
    "P-MS8XDX",
    "P-SHW457",
    "P-T3VPTK",
+   "P-X3FCNA",
    "P-DV7MVH",
    "P-JMVSYY",
    "P-QT8PXR",
@@ -201,7 +207,7 @@
   "AZ": 20,
   "NV": 15,
   "CO": 4,
-  "OR": 3,
+  "OR": 4,
   "MD": 2,
   "WA": 2,
   "NY": 1,
@@ -209,7 +215,7 @@
   "TX": 1
  },
  "excluded_counts": {
-  "no_asking_price": 133,
+  "no_asking_price": 139,
   "sold": 33,
   "under_contract": 16
  }
