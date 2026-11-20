@@ -1,7 +1,7 @@
 {
- "built_at": "2026-11-19T21:07:40Z",
- "fetched": 362,
- "included": 163,
+ "built_at": "2026-11-20T20:50:43Z",
+ "fetched": 373,
+ "included": 174,
  "excluded": {
   "no_asking_price": [
    "P-KRD6VE",
@@ -214,7 +214,7 @@
   "P-X3YEPK: operatories 38 hidden (over limit)"
  ],
  "by_state": {
-  "CA": 111,
+  "CA": 122,
   "AZ": 22,
   "NV": 14,
   "OR": 4,
